@@ -73,8 +73,8 @@ class AutoRec():
                                          mean=0, stddev=0.03),dtype=tf.float32)
         W = tf.compat.v1.get_variable(name="W", initializer=tf.random.truncated_normal(shape=[self.hidden_neuron, self.num_items],
                                          mean=0, stddev=0.03),dtype=tf.float32)
-        mu = tf.get_variable(name="mu", initializer=tf.zeros(shape=self.hidden_neuron),dtype=tf.float32)
-        b = tf.get_variable(name="b", initializer=tf.zeros(shape=self.num_items), dtype=tf.float32)
+        mu = tf.compat.v1.get_variable(name="mu", initializer=tf.zeros(shape=self.hidden_neuron),dtype=tf.float32)
+        b = tf.compat.v1.get_variable(name="b", initializer=tf.zeros(shape=self.num_items), dtype=tf.float32)
 
         pre_Encoder = tf.matmul(self.input_R,V) + mu
         self.Encoder = tf.nn.sigmoid(pre_Encoder)

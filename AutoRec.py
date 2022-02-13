@@ -66,10 +66,10 @@ class AutoRec():
         self.make_records()
 
     def prepare_model(self):
-        self.input_R = tf.placeholder(dtype=tf.float32, shape=[None, self.num_items], name="input_R")
+        self.input_R = tf.compat.v1.placeholder(dtype=tf.float32, shape=[None, self.num_items], name="input_R")
         self.input_mask_R = tf.placeholder(dtype=tf.float32, shape=[None, self.num_items], name="input_mask_R")
 
-        V = tf.get_variable(name="V", initializer=tf.truncated_normal(shape=[self.num_items, self.hidden_neuron],
+        V = tf.compat.v1.get_variable(name="V", initializer=tf.truncated_normal(shape=[self.num_items, self.hidden_neuron],
                                          mean=0, stddev=0.03),dtype=tf.float32)
         W = tf.get_variable(name="W", initializer=tf.truncated_normal(shape=[self.hidden_neuron, self.num_items],
                                          mean=0, stddev=0.03),dtype=tf.float32)
@@ -89,7 +89,7 @@ class AutoRec():
         self.cost = rec_cost + reg_cost
 
         if self.optimizer_method == "Adam":
-            optimizer = tf.train.AdamOptimizer(self.lr)
+            optimizer = tf.compat.v1.train.AdamOptimizer(self.lr)
         elif self.optimizer_method == "RMSProp":
             optimizer = tf.train.RMSPropOptimizer(self.lr)
         else:

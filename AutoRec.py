@@ -45,7 +45,7 @@ class AutoRec():
         self.global_step = tf.Variable(0, trainable=False)
         self.decay_epoch_step = args.decay_epoch_step
         self.decay_step = self.decay_epoch_step * self.num_batch
-        self.lr = tf.train.exponential_decay(self.base_lr, self.global_step,
+        self.lr = tf.compat.v1.train.exponential_decay(self.base_lr, self.global_step,
                                                    self.decay_step, 0.96, staircase=True)
         self.lambda_value = args.lambda_value
 

@@ -58,7 +58,7 @@ class AutoRec():
 
     def run(self):
         self.prepare_model()
-        init = tf.global_variables_initializer()
+        init = tf.compat.v1.global_variables_initializer()
         self.sess.run(init)
         for epoch_itr in range(self.train_epoch):
             self.train_model(epoch_itr)
@@ -67,11 +67,11 @@ class AutoRec():
 
     def prepare_model(self):
         self.input_R = tf.compat.v1.placeholder(dtype=tf.float32, shape=[None, self.num_items], name="input_R")
-        self.input_mask_R = tf.placeholder(dtype=tf.float32, shape=[None, self.num_items], name="input_mask_R")
+        self.input_mask_R = tf.compat.v1.placeholder(dtype=tf.float32, shape=[None, self.num_items], name="input_mask_R")
 
-        V = tf.compat.v1.get_variable(name="V", initializer=tf.truncated_normal(shape=[self.num_items, self.hidden_neuron],
+        V = tf.compat.v1.get_variable(name="V", initializer=tf.random.truncated_normal(shape=[self.num_items, self.hidden_neuron],
                                          mean=0, stddev=0.03),dtype=tf.float32)
-        W = tf.get_variable(name="W", initializer=tf.truncated_normal(shape=[self.hidden_neuron, self.num_items],
+        W = tf.compat.v1.get_variable(name="W", initializer=tf.random.truncated_normal(shape=[self.hidden_neuron, self.num_items],
                                          mean=0, stddev=0.03),dtype=tf.float32)
         mu = tf.get_variable(name="mu", initializer=tf.zeros(shape=self.hidden_neuron),dtype=tf.float32)
         b = tf.get_variable(name="b", initializer=tf.zeros(shape=self.num_items), dtype=tf.float32)

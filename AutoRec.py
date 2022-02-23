@@ -91,7 +91,7 @@ class AutoRec():
         if self.optimizer_method == "Adam":
             optimizer = tf.compat.v1.train.AdamOptimizer(self.lr)
         elif self.optimizer_method == "RMSProp":
-            optimizer = tf.train.RMSPropOptimizer(self.lr)
+            optimizer = tf.compat.v1.train.RMSPropOptimizer(self.lr)
         else:
             raise ValueError("Optimizer Key ERROR")
 
